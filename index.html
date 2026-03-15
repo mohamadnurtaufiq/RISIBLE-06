@@ -4,503 +4,235 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RISIBLE 06</title>
-
 <style>
-
-/* ===== BODY ===== */
-body{
-margin:0;
-font-family:Segoe UI;
-background:linear-gradient(135deg,#020617,#0f172a);
-color:white;
-}
-
-/* ===== NAVBAR ===== */
-.navbar{
-display:flex;
-justify-content:center;
-gap:40px;
-background:#020617;
-padding:20px;
-font-weight:bold;
-}
-
-.navbar div{
-cursor:pointer;
-}
-
-.navbar div:hover{
-color:gold;
-}
-
-/* ===== SECTION ===== */
-.section{
-display:none;
-padding:40px;
-text-align:center;
-}
-
-.active{
-display:block;
-}
-
-/* ===== HOME ===== */
-#home{
-background:url("foto sma .jpg") center/cover no-repeat;
-height:90vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-position:relative;
-}
-
-#home::before{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-top:0;
-left:0;
-}
-
-.hero{
-font-size:50px;
-font-weight:bold;
-z-index:1;
-text-shadow:0 0 20px rgba(255,215,0,0.8);
-}
-
-#home p{
-z-index:1;
-font-size:20px;
-}
-
-/* ===== GRID RANDOM ===== */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-gap:20px;
-margin-top:30px;
-}
-
-.card{
-background:#1e293b;
-padding:10px;
-border-radius:10px;
-}
-
-.card img,.card video{
-width:100%;
-border-radius:10px;
-}
-
-/* ===== UPLOAD ===== */
-.upload{
-margin-top:30px;
-}
-
-button{
-padding:10px 20px;
-border:none;
-background:gold;
-cursor:pointer;
-border-radius:5px;
-}
-
-/* ===== SQUAD ===== */
-.squad-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:30px;
-margin-top:30px;
-}
-
-.squad-card{
-position:relative;
-border-radius:15px;
-overflow:hidden;
-}
-
-.squad-card img{
-width:100%;
-height:400px;
-object-fit:cover;
-}
-
-.nama{
-position:absolute;
-bottom:0;
-width:100%;
-background:linear-gradient(to top,black,transparent);
-padding:15px;
-font-weight:bold;
-}
-
-/* ===== WALI ===== */
-.wali-card{
-max-width:300px;
-margin:auto;
-position:relative;
-}
-
-.wali-card img{
-width:100%;
-height:420px;
-object-fit:cover;
-}
-
-/* ===== SPOTIFY ===== */
-iframe{
-margin-top:30px;
-}
-
+body{margin:0;font-family:Segoe UI;background:linear-gradient(135deg,#020617,#0f172a);color:white;}
+.navbar{display:flex;justify-content:center;gap:40px;background:#020617;padding:20px;font-weight:bold;}
+.navbar div{cursor:pointer;}
+.navbar div:hover{color:gold;}
+.section{display:none;padding:40px;text-align:center;}
+.active{display:block;}
+#home{background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("foto sma .jpg") center/cover no-repeat;min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+.hero{font-size:50px;font-weight:bold;text-shadow:0 0 20px rgba(255,215,0,0.8);}
+#home p{font-size:20px;margin:8px 0;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-top:30px;}
+.card{background:#1e293b;padding:10px;border-radius:10px;position:relative;}
+.card img,.card video{width:100%;border-radius:10px;}
+.card p{margin:8px 0 4px;font-size:14px;}
+.delete-btn{position:absolute;top:8px;right:8px;background:rgba(220,38,38,0.85);color:white;border:none;border-radius:50%;width:28px;height:28px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
+.upload{margin-top:30px;background:#1e293b;padding:24px;border-radius:12px;display:inline-block;min-width:300px;}
+.upload input[type=text]{width:100%;padding:8px 12px;border-radius:6px;border:1px solid #334155;background:#0f172a;color:white;font-size:14px;box-sizing:border-box;margin-bottom:12px;}
+.upload input[type=file]{color:white;font-size:13px;margin-bottom:12px;display:block;width:100%;}
+button{padding:10px 20px;border:none;background:gold;cursor:pointer;border-radius:5px;font-weight:bold;color:#020617;}
+button:disabled{background:#94a3b8;cursor:not-allowed;}
+.status{margin-top:12px;font-size:13px;color:#94a3b8;}
+.loading-text{color:#94a3b8;font-size:14px;margin-top:20px;}
+.squad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:30px;margin-top:30px;}
+.squad-card{position:relative;border-radius:15px;overflow:hidden;}
+.squad-card img{width:100%;height:400px;object-fit:cover;}
+.nama{position:absolute;bottom:0;width:100%;background:linear-gradient(to top,black,transparent);padding:15px;font-weight:bold;}
+.wali-card{max-width:300px;margin:auto;position:relative;}
+.wali-card img{width:100%;height:420px;object-fit:cover;border-radius:15px;}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
-<div onclick="show('home')">HOME</div>
-<div onclick="show('random')">RANDOM</div>
-<div onclick="show('squad')">SQUAD</div>
-<div onclick="show('spotify')">PLAYLIST</div>
+  <div onclick="show('home')">HOME</div>
+  <div onclick="show('random')">RANDOM</div>
+  <div onclick="show('squad')">SQUAD</div>
+  <div onclick="show('spotify')">PLAYLIST</div>
 </div>
 
 <!-- HOME -->
 <div id="home" class="section active">
-<div class="hero">
-Republik Islam Science Beban Class Enam
-</div>
-<p>WE'RE FAMILY</p>
-<p>From 2020 until forever</p>
+  <div class="hero">Republik Islam Science Beban Class Enam</div>
+  <p>WE'RE FAMILY</p>
+  <p>From 2020 until forever</p>
 </div>
 
 <!-- RANDOM -->
 <div id="random" class="section">
-<h2>Upload Foto & Video Kenangan di sini</h2>
+  <h2>Upload Foto & Video Kenangan di sini</h2>
+  <p class="status" id="countLabel"></p>
+  <div id="randomGrid" class="grid"></div>
+  <p id="loadingMsg" class="loading-text">Memuat kenangan...</p>
 
-<div id="randomGrid" class="grid"></div>
-
-<div class="upload">
-<input id="nama" placeholder="Nama"><br><br>
-<input type="file" id="file"><br><br>
-<button onclick="upload()">UPLOAD</button>
+  <div class="upload">
+    <input type="text" id="nama" placeholder="Nama kamu">
+    <input type="file" id="file" accept="image/*,video/*">
+    <button id="uploadBtn" onclick="upload()">UPLOAD</button>
+    <p class="status" id="uploadStatus"></p>
+  </div>
 </div>
-</div>
 
-  <!-- SQUAD -->
-  <div id="squad" class="section">
-
+<!-- SQUAD -->
+<div id="squad" class="section">
   <h2>Wali Kelas</h2>
-
   <div class="wali-card">
-
-  <img src="foto wali kelas.jpg">
-
-  <div class="nama">
-  DRA. SUSI MARLIAH
+    <img src="foto wali kelas.jpg">
+    <div class="nama">DRA. SUSI MARLIAH</div>
   </div>
-
-  </div>
-
-
   <h2>Squad Kelas</h2>
-
   <div class="squad-grid">
-
-  <div class="squad-card">
-  <img src="P1160012.JPG">
-  <div class="nama">FINA</div>
+    <div class="squad-card"><img src="P1160012.JPG"><div class="nama">FINA</div></div>
+    <div class="squad-card"><img src="P1160014.JPG"><div class="nama">TAUFIQ</div></div>
+    <div class="squad-card"><img src="P1160077.JPG"><div class="nama">TIRA</div></div>
+    <div class="squad-card"><img src="P1160035.JPG"><div class="nama">NAYA</div></div>
+    <div class="squad-card"><img src="P1160037.JPG"><div class="nama">MAR'AH</div></div>
+    <div class="squad-card"><img src="P1160038.JPG"><div class="nama">PUTE</div></div>
+    <div class="squad-card"><img src="P1160041.JPG"><div class="nama">ALISSYA</div></div>
+    <div class="squad-card"><img src="P1160060.JPG"><div class="nama">IRHAM</div></div>
+    <div class="squad-card"><img src="P1160026.JPG"><div class="nama">RAFLI</div></div>
+    <div class="squad-card"><img src="P1160032.JPG"><div class="nama">MUTI</div></div>
+    <div class="squad-card"><img src="P1160074.JPG"><div class="nama">MAYA</div></div>
+    <div class="squad-card"><img src="P1160075.JPG"><div class="nama">GALUH</div></div>
+    <div class="squad-card"><img src="P1160039.JPG"><div class="nama">BETY</div></div>
+    <div class="squad-card"><img src="P1160065.JPG"><div class="nama">FADIL</div></div>
+    <div class="squad-card"><img src="P1160068.JPG"><div class="nama">DEFIANA</div></div>
+    <div class="squad-card"><img src="P1160066.JPG"><div class="nama">AYU</div></div>
+    <div class="squad-card"><img src="P1160015.JPG"><div class="nama">FAUZIAH</div></div>
+    <div class="squad-card"><img src="P1160016.JPG"><div class="nama">DINI</div></div>
+    <div class="squad-card"><img src="P1160019.JPG"><div class="nama">RISKA</div></div>
+    <div class="squad-card"><img src="P1160311.JPG"><div class="nama">DIEGO</div></div>
+    <div class="squad-card"><img src="P1160063.JPG"><div class="nama">IZAZ</div></div>
+    <div class="squad-card"><img src="P1160078.JPG"><div class="nama">MAGE</div></div>
+    <div class="squad-card"><img src="P1160070.JPG"><div class="nama">AFIAT</div></div>
+    <div class="squad-card"><img src="P1160069.JPG"><div class="nama">RIFKA</div></div>
+    <div class="squad-card"><img src="P1160022.JPG"><div class="nama">JUFRI</div></div>
+    <div class="squad-card"><img src="P1160027.JPG"><div class="nama">ANGGA</div></div>
+    <div class="squad-card"><img src="P1160024.JPG"><div class="nama">FAREL</div></div>
+    <div class="squad-card"><img src="P1160028.JPG"><div class="nama">SYAHBAN</div></div>
+    <div class="squad-card"><img src="P1160017.JPG"><div class="nama">JUSUF</div></div>
+    <div class="squad-card"><img src="P1160310.JPG"><div class="nama">RIFKI</div></div>
+    <div class="squad-card"><img src="P1160029.JPG"><div class="nama">ADIT</div></div>
+    <div class="squad-card"><img src="P1160312.JPG"><div class="nama">FIKRI</div></div>
+    <div class="squad-card"><img src="P1160030.JPG"><div class="nama">RONGGO</div></div>
+    <div class="squad-card"><img src="P1160302.JPG"><div class="nama">WILSON</div></div>
+    <div class="squad-card"><img src="P1160317.JPG"><div class="nama">NIZAR</div></div>
   </div>
-
-  <div class="squad-card">
-  <img src="P1160014.JPG">
-  <div class="nama">TAUFIQ</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160077.JPG">
-  <div class="nama">TIRA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160035.JPG">
-  <div class="nama">NAYA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160037.JPG">
-  <div class="nama">MAR'AH</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160038.JPG">
-  <div class="nama">PUTE</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160041.JPG">
-  <div class="nama">ALISSYA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160060.JPG">
-  <div class="nama">IRHAM</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160026.JPG">
-  <div class="nama">RAFLI</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160032.JPG">
-  <div class="nama">MUTI</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160074.JPG">
-  <div class="nama">MAYA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160075.JPG">
-  <div class="nama">GALUH</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160039.JPG">
-  <div class="nama">BETY</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160065.JPG">
-  <div class="nama">FADIL</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160068.JPG">
-  <div class="nama">DEFIANA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160066.JPG">
-  <div class="nama">AYU</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160015.JPG">
-  <div class="nama">FAUZIAH</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160016.JPG">
-  <div class="nama">DINI</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160019.JPG">
-  <div class="nama">RISKA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160311.JPG">
-  <div class="nama">DIEGO</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160063.JPG">
-  <div class="nama">IZAZ</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160078.JPG">
-  <div class="nama">MAGE</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160070.JPG">
-  <div class="nama">AFIAT</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160069.JPG">
-  <div class="nama">RIFKA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160022.JPG">
-  <div class="nama">JUFRI</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160027.JPG">
-  <div class="nama">ANGGA</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160024.JPG">
-  <div class="nama">FAREL</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160028.JPG">
-  <div class="nama">SYAHBAN</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160017.JPG">
-  <div class="nama">JUSUF</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160310.JPG">
-  <div class="nama">RIFKI</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160029.JPG">
-  <div class="nama">ADIT</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160312.JPG">
-  <div class="nama">FIKRI</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160030.JPG">
-  <div class="nama">RONGGO</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160302.JPG">
-  <div class="nama">WILSON</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="P1160317.JPG">
-  <div class="nama">NIZAR</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="img/squad/siswa3.jpg">
-  <div class="nama">Nama Siswa 3</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="img/squad/siswa3.jpg">
-  <div class="nama">Nama Siswa 3</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="img/squad/siswa3.jpg">
-  <div class="nama">Nama Siswa 3</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="img/squad/siswa3.jpg">
-  <div class="nama">Nama Siswa 3</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="img/squad/siswa3.jpg">
-  <div class="nama">Nama Siswa 3</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="img/squad/siswa3.jpg">
-  <div class="nama">Nama Siswa 3</div>
-  </div>
-
-  <div class="squad-card">
-  <img src="img/squad/siswa3.jpg">
-  <div class="nama">Nama Siswa 3</div>
-  </div>
-
-<!-- TAMBAH SISWA DI SINI -->
-
-</div>
 </div>
 
 <!-- SPOTIFY -->
 <div id="spotify" class="section">
-<h2>Playlist Kelas</h2>
-<iframe
-src="https://open.spotify.com/embed/playlist/6OGWiukby7JzHTlQ2Iyvyb"
-width="80%"
-height="400"
-frameborder="0">
-</iframe>
+  <h2>Playlist Kelas</h2>
+  <iframe src="https://open.spotify.com/embed/playlist/6OGWiukby7JzHTlQ2Iyvyb" width="80%" height="400" frameborder="0"></iframe>
 </div>
 
 <script>
 
 // ===== NAVIGATION =====
 window.show = id => {
-  document.querySelectorAll(".section")
-    .forEach(s => s.classList.remove("active"));
-
-  const target = document.getElementById(id);
-  target.classList.add("active");
-
-  target.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  const t = document.getElementById(id);
+  t.classList.add("active");
+  t.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-// ===== STORAGE =====
-let kenangan = JSON.parse(localStorage.getItem("kenangan")) || [];
+// ===== DATABASE (Firebase Realtime Database) =====
+const DB_URL = "https://risible06-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
-// ===== UPLOAD =====
-window.upload = () => {
+async function loadKenangan() {
+  const grid = document.getElementById("randomGrid");
+  const msg = document.getElementById("loadingMsg");
+  const countLabel = document.getElementById("countLabel");
+
+  try {
+    const res = await fetch(`${DB_URL}/kenangan.json`);
+    const data = await res.json();
+
+    if (!data) {
+      msg.textContent = "Belum ada kenangan. Upload yang pertama!";
+      countLabel.textContent = "";
+      return;
+    }
+
+    const entries = Object.entries(data);
+    msg.textContent = "";
+    countLabel.textContent = entries.length + " kenangan tersimpan";
+    grid.innerHTML = "";
+
+    entries.reverse().forEach(([key, item]) => {
+      const isVideo = item.url.startsWith("data:video");
+      const media = isVideo
+        ? `<video controls src="${item.url}" style="width:100%;border-radius:10px;"></video>`
+        : `<img src="${item.url}" style="width:100%;border-radius:10px;">`;
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        ${media}
+        <p>${item.nama}</p>
+        <small style="color:#64748b;font-size:11px;">${item.tanggal || ""}</small>
+        <button class="delete-btn" onclick="hapus('${key}')" title="Hapus">×</button>
+      `;
+      grid.appendChild(card);
+    });
+
+  } catch (e) {
+    msg.textContent = "Gagal memuat. Coba refresh.";
+  }
+}
+
+window.hapus = async (key) => {
+  if (!confirm("Hapus kenangan ini?")) return;
+  try {
+    await fetch(`${DB_URL}/kenangan/${key}.json`, { method: "DELETE" });
+    loadKenangan();
+  } catch (e) {
+    alert("Gagal menghapus.");
+  }
+};
+
+window.upload = async () => {
   const fileInput = document.getElementById("file");
-  const nama = document.getElementById("nama").value;
+  const nama = document.getElementById("nama").value.trim();
   const file = fileInput.files[0];
+  const btn = document.getElementById("uploadBtn");
+  const status = document.getElementById("uploadStatus");
 
-  if (!file) return alert("Pilih file dulu!");
+  if (!nama) { status.textContent = "Isi nama kamu dulu!"; return; }
+  if (!file) { status.textContent = "Pilih file dulu!"; return; }
+  if (file.size > 4 * 1024 * 1024) { status.textContent = "File terlalu besar (max 4MB)!"; return; }
+
+  btn.disabled = true;
+  status.textContent = "Sedang upload...";
 
   const reader = new FileReader();
-
-  reader.onload = function(e) {
+  reader.onload = async (e) => {
     const url = e.target.result;
+    const tanggal = new Date().toLocaleDateString("id-ID", {
+      day: "numeric", month: "long", year: "numeric"
+    });
 
-    kenangan.push({ nama, url });
-    localStorage.setItem("kenangan", JSON.stringify(kenangan));
+    try {
+      await fetch(`${DB_URL}/kenangan.json`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nama, url, tanggal })
+      });
 
-    alert("Upload berhasil!");
-    load();
+      status.textContent = "Upload berhasil! Semua orang bisa melihatnya.";
+      document.getElementById("nama").value = "";
+      fileInput.value = "";
+      loadKenangan();
+
+    } catch (e) {
+      status.textContent = "Upload gagal. Coba lagi.";
+    }
+
+    btn.disabled = false;
+  };
+
+  reader.onerror = () => {
+    status.textContent = "Gagal baca file.";
+    btn.disabled = false;
   };
 
   reader.readAsDataURL(file);
 };
 
-// ===== LOAD =====
-function load() {
-  const grid = document.getElementById("randomGrid");
-  grid.innerHTML = "";
-
-  kenangan.forEach(data => {
-    const media = data.url.includes("video")
-      ? `<video controls src="${data.url}"></video>`
-      : `<img src="${data.url}">`;
-
-    grid.innerHTML += `
-      <div class="card">
-        ${media}
-        <p>${data.nama}</p>
-      </div>
-    `;
-  });
-}
-
-load();
+loadKenangan();
 
 </script>
-
 </body>
 </html>
-
